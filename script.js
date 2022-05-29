@@ -53,11 +53,11 @@
 
 // https://httpdump.io/
 
-let endpoint = 'https://httpdump.io/r4kix'
+let endpoint = 'https://httpdump.io/wdgmo'
 let payload = {
     name: 'Vaidotas',
-    surname: 'Ku',
-    b: 'b',
+    surname: 'Kuzmars',
+    data: '2022.05.28',
 };
 fetch(endpoint,
     {
@@ -68,12 +68,11 @@ fetch(endpoint,
     .then(function(res){ console.log(res)})
 
     const createButton = document.getElementsByClassName("w3-btn", "w3-brown")
-    console.log(createButton[0])
     const submitButton = document.getElementById('submit-button')
     
     createButton[0].addEventListener('click', createInput)
     
-    submitButton.addEventListener('submit', submitAllValues)
+    //submitButton.addEventListener('submit', submitAllValues())
 
 
     function createInput() {
@@ -81,21 +80,38 @@ fetch(endpoint,
       inputContainer.setAttribute('id', 'input-container')
       const ciaSugulsInput = document.getElementById("input-value");
       const createInput = document.createElement("input");//šitą appendinsiu
-      const createCloseButton = document.createElement('button') //šitą appendinsiu
-      createCloseButton.innerHTML = "X";
-      createCloseButton.classList.add('w3-button', 'w3-xlarge', 'w3-circle', 'w3-teal')
-      inputContainer.append(createInput, createCloseButton)
+      createInput.innerHTML = 'name:[task]'
+      const createCloseButton = document.createElement('span') //šitą appendinsiu
+      createCloseButton.innerHTML = "&times;";     
+      createCloseButton.classList.add('w3-button', 'w3-xlarge', 'w3-circle', 'w3-teal', 'close')      
+      createCloseButton.setAttribute('name', 'task')      
       createInput.setAttribute("type", "text");
       createInput.classList.add("w3-input", "w3-border", "w3-sand");
+      createInput.setAttribute('id', 'inputas')
+      inputContainer.append(createInput, createCloseButton)
       ciaSugulsInput.appendChild(inputContainer);
-      //createCloseButton.addEventListener('click', removeInput(inputContainer))
-      //console.log(removeInput(inputContainer))
-    }
-    function removeInput(element){
+
+      let closebtns = document.getElementsByClassName("close");
       
-      return element.remove();
+      for (let i = 0; i < closebtns.length; i++) {
+        closebtns[i].addEventListener("click", function() {
+          this.parentElement.remove()
+        });
+      }
+
+      
     }
 
-    function submitAllValues(){
+    // function submitAllValues(event){
+    //   //event.preventDefault();
+    //   document.getElementById("container").submit();
+    //   console.log('veikia')
+    // }
 
-    }
+    const form = document.querySelector("form");
+    const iV = document.getElementById('inputas')
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      
+      console.log(form.value)
+    })
