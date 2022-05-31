@@ -1,6 +1,13 @@
 body{
     background-color: antiquewhite;
 }
-#input-container{
+.input-place{
     display: flex;
+    flex-direction: column;
+}
+.input-container{
+    display: flex;
+}
+#btn{
+    margin-left: 20px;
 }
