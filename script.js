@@ -1,18 +1,7 @@
 // https://httpdump.io/
 
-let endpoint = "https://httpdump.io/oour3";
 const form = document.querySelector("form");
 form.addEventListener("submit", sendData);
-let payload = {
-  name: form.elements.value,
-};
-fetch(endpoint, {
-  method: "POST",
-  body: JSON.stringify(payload),
-  mode: "no-cors",
-}).then(function (res) {
-  console.log(res);
-});
 
 const createButton = document.getElementsByClassName("w3-btn", "w3-brown");
 const submitButton = document.getElementById("submit-button");
@@ -25,7 +14,7 @@ function createInput() {
   const inputContainer = document.createElement("div");
   inputContainer.setAttribute("class", "input-container");
   const ciaSugulsInput = document.getElementsByClassName("input-place")[0];
-  console.log(ciaSugulsInput);
+  //console.log(ciaSugulsInput);
   const myInput = document.createElement("input"); //šitą appendinsiu
   const xButton = document.createElement("span"); //šitą appendinsiu
   xButton.innerHTML = "&times;";
@@ -44,20 +33,29 @@ function createInput() {
   inputContainer.append(myInput, xButton);
   ciaSugulsInput.appendChild(inputContainer);
 
-  xButton.addEventListener("click", function () { //trina myInput & xButton
+  xButton.addEventListener("click", function () {
+    //trina myInput & xButton
     this.parentElement.remove();
   });
 }
 
 function sendData(e) {
   e.preventDefault();
-  console.log(form.elements);
+
+  let payload = {};
+
   for (const i in e.target.elements) {
-    console.log(i);
-    if (i == "inputas" + count) {
-      console.log(true);
-    } else {
-      console.log(false);
+    //console.log(i)
+    if (i.includes("inputas")) {
+      payload[i] = this.elements[i].value;
     }
   }
+  let endpoint = "https://httpdump.io/oour3";
+  fetch(endpoint, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    mode: "no-cors",
+  }).then(function (res) {
+    console.log(res);
+  });
 }
