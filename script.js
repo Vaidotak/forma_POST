@@ -1,4 +1,3 @@
-
 // console.log('veikia')
 
 // // konstruktorius
@@ -11,7 +10,7 @@
 //       let secretKey = raktasM
 //       console.log(secretKey)
 //     }
-    
+
 //   }
 
 //   const myCar = new Cars('Toyota', 'juoda', 5)
@@ -24,8 +23,6 @@
 
 //   // klasė
 
-  
-  
 //   const ages = [33, 32, 16];
 //   console.log(ages.filter((age) => age > 20))
 //   // naujas masyvas iš norimų reikšmių
@@ -50,68 +47,66 @@
 //   console.log("Nupirk " + item + "!")
 // })
 
-
 // https://httpdump.io/
 
-let endpoint = 'https://httpdump.io/wdgmo'
+let endpoint = "https://httpdump.io/oour3";
+const form = document.querySelector("form");
+form.addEventListener("submit", sendData);
 let payload = {
-    name: 'Vaidotas',
-    surname: 'Kuzmars',
-    data: '2022.05.28',
+  name: form.elements.value,
 };
-fetch(endpoint,
-    {
-        method: "POST",
-        body: JSON.stringify(payload),
-        mode: 'no-cors'
-    })
-    .then(function(res){ console.log(res)})
+fetch(endpoint, {
+  method: "POST",
+  body: JSON.stringify(payload),
+  mode: "no-cors",
+}).then(function (res) {
+  console.log(res);
+});
 
-    const createButton = document.getElementsByClassName("w3-btn", "w3-brown")
-    const submitButton = document.getElementById('submit-button')
-    
-    createButton[0].addEventListener('click', createInput)
-    
-    //submitButton.addEventListener('submit', submitAllValues())
+const createButton = document.getElementsByClassName("w3-btn", "w3-brown");
+const submitButton = document.getElementById("submit-button");
 
+createButton[0].addEventListener("click", createInput);
+let count = 0;
 
-    function createInput() {
-      const inputContainer = document.createElement("div");
-      inputContainer.setAttribute('id', 'input-container')
-      const ciaSugulsInput = document.getElementById("input-value");
-      const createInput = document.createElement("input");//šitą appendinsiu
-      createInput.innerHTML = 'name:[task]'
-      const createCloseButton = document.createElement('span') //šitą appendinsiu
-      createCloseButton.innerHTML = "&times;";     
-      createCloseButton.classList.add('w3-button', 'w3-xlarge', 'w3-circle', 'w3-teal', 'close')      
-      createCloseButton.setAttribute('name', 'task')      
-      createInput.setAttribute("type", "text");
-      createInput.classList.add("w3-input", "w3-border", "w3-sand");
-      createInput.setAttribute('id', 'inputas')
-      inputContainer.append(createInput, createCloseButton)
-      ciaSugulsInput.appendChild(inputContainer);
+function createInput() {
+  count++;
+  const inputContainer = document.createElement("div");
+  inputContainer.setAttribute("class", "input-container");
+  const ciaSugulsInput = document.getElementsByClassName("input-place")[0];
+  console.log(ciaSugulsInput);
+  const myInput = document.createElement("input"); //šitą appendinsiu
+  const xButton = document.createElement("span"); //šitą appendinsiu
+  xButton.innerHTML = "&times;";
+  xButton.classList.add(
+    "w3-button",
+    "w3-xlarge",
+    "w3-circle",
+    "w3-teal",
+    "close"
+  );
+  xButton.setAttribute("name", "task");
+  myInput.setAttribute("type", "text");
+  myInput.classList.add("w3-input", "w3-border", "w3-sand");
+  myInput.setAttribute("name", "inputas" + count);
+  myInput.setAttribute("placeholder", "Task#" + ` ` + count);
+  inputContainer.append(myInput, xButton);
+  ciaSugulsInput.appendChild(inputContainer);
 
-      let closebtns = document.getElementsByClassName("close");
-      
-      for (let i = 0; i < closebtns.length; i++) {
-        closebtns[i].addEventListener("click", function() {
-          this.parentElement.remove()
-        });
-      }
+  xButton.addEventListener("click", function () {
+    this.parentElement.remove();
+  });
+}
 
-      
+function sendData(e) {
+  e.preventDefault();
+  console.log(form.elements);
+  for (const i in e.target.elements) {
+    console.log(i);
+    if (i == "inputas" + count) {
+      console.log(true);
+    } else {
+      console.log(false);
     }
-
-    // function submitAllValues(event){
-    //   //event.preventDefault();
-    //   document.getElementById("container").submit();
-    //   console.log('veikia')
-    // }
-
-    const form = document.querySelector("form");
-    const iV = document.getElementById('inputas')
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      
-      console.log(form.value)
-    })
+  }
+}
